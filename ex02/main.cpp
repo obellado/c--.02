@@ -16,9 +16,11 @@ int	main( void ) {
 	std::cout << a++ << std::endl;
 	std::cout << a << std::endl;
 
-	std::cout << b << std::endl;
+	std::cout << b << std::endl << std::endl;
 
-	std::cout << Fixed::max( a, b ) << std::endl << std::endl;
+	std::cout << "max" << Fixed::max( a, b ) << std::endl << std::endl;
+
+	std::cout << "min" << Fixed::min( a, b ) << std::endl << std::endl;
 
 	std::cout << c << std::endl;
 	std::cout << d << std::endl;
@@ -29,6 +31,6 @@ int	main( void ) {
 	std::cout << a << std::endl;
 	std::cout << a-- << std::endl;
 	std::cout << a << std::endl;
-	
+
 	return 0;
 }

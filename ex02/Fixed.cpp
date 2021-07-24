@@ -52,20 +52,27 @@ int Fixed::toInt( void ) const {
 }
 
 Fixed Fixed::operator+ (const Fixed & one) const {
-	return Fixed((float)(this->_pointValue + one.getRawBits()) / (float)(1 << Fixed::_nOfFractionalBits));
+	Fixed r;
+	r.setRawBits(this->_pointValue + one.getRawBits());
+	return r;
 }
 
 Fixed Fixed::operator- (const Fixed &one) const {
-	return Fixed((float)(this->_pointValue - one.getRawBits()) / (float)(1 << Fixed::_nOfFractionalBits));
-
+	Fixed r;
+	r.setRawBits(this->_pointValue - one.getRawBits());
+	return r;
 }
 
 Fixed Fixed::operator* (const Fixed &one) const {
-	return Fixed(this->toFloat() * one.toFloat());
+	Fixed r;
+	r.setRawBits(this->_pointValue * one.getRawBits() >> Fixed::_nOfFractionalBits);
+	return r;
 }
 
 Fixed Fixed::operator/ (const Fixed &one) const {
-	return Fixed( this->_pointValue / one.getRawBits() );
+	Fixed r;
+	r.setRawBits(this->_pointValue - one.getRawBits());
+	return r;
 }
 
 Fixed& Fixed::operator++ ( void ) {

@@ -16,8 +16,7 @@ class Fixed{
 		int getRawBits( void ) const;
 		void setRawBits( int const raw );
 
-		Fixed& operator = (Fixed &tocopy ) ;
-		Fixed const & operator = ( Fixed const &tocopy );
+		Fixed& operator=( const Fixed & tocopy );
 
 		Fixed( int const i );
 		Fixed( float const i );
@@ -35,12 +34,12 @@ class Fixed{
 		Fixed operator++ ( int one );
 		Fixed operator-- ( int one );
 
-		bool operator==(const Fixed & one);
-		bool operator!=(const Fixed & one);
-		bool operator< (const Fixed & one);
-		bool operator> (const Fixed & one);
-		bool operator<=(const Fixed & one);
-		bool operator>=(const Fixed & one);
+		bool operator==(const Fixed & one) const;
+		bool operator!=(const Fixed & one) const;
+		bool operator< (const Fixed & one) const;
+		bool operator> (const Fixed & one) const;
+		bool operator<=(const Fixed & one) const;
+		bool operator>=(const Fixed & one) const;
 
 		static Fixed& min(Fixed & one, Fixed & two);
 		static const Fixed& min(const Fixed & one, const Fixed & two);

@@ -15,13 +15,7 @@ Fixed::Fixed( Fixed const & tocopy ){
 	this->_pointValue = tocopy.getRawBits();
 }
 
-Fixed& Fixed::operator = (Fixed &tocopy ){
-	if (this != &tocopy)
-		this->_pointValue = tocopy.getRawBits();
-	return (*this);
-}
-
-Fixed const & Fixed::operator = ( Fixed const &tocopy ) {
+Fixed& Fixed::operator= ( const Fixed & tocopy ){
 	if (this != &tocopy)
 		this->_pointValue = tocopy.getRawBits();
 	return (*this);
@@ -58,20 +52,27 @@ int Fixed::toInt( void ) const {
 }
 
 Fixed Fixed::operator+ (const Fixed & one) const {
-	return Fixed((float)(this->_pointValue + one.getRawBits()) / (float)(1 << Fixed::_nOfFractionalBits));
+	Fixed r;
+	r.setRawBits(this->_pointValue + one.getRawBits());
+	return r;
 }
 
 Fixed Fixed::operator- (const Fixed &one) const {
-	return Fixed((float)(this->_pointValue - one.getRawBits()) / (float)(1 << Fixed::_nOfFractionalBits));
-
+	Fixed r;
+	r.setRawBits(this->_pointValue - one.getRawBits());
+	return r;
 }
 
 Fixed Fixed::operator* (const Fixed &one) const {
-	return Fixed(this->toFloat() * one.toFloat());
+	Fixed r;
+	r.setRawBits(this->_pointValue * one.getRawBits() >> Fixed::_nOfFractionalBits);
+	return r;
 }
 
 Fixed Fixed::operator/ (const Fixed &one) const {
-	return Fixed( this->_pointValue / one.getRawBits() );
+	Fixed r;
+	r.setRawBits(this->_pointValue - one.getRawBits());
+	return r;
 }
 
 Fixed& Fixed::operator++ ( void ) {
@@ -98,12 +99,12 @@ Fixed Fixed::operator-- ( int one ) {
 	return (other);
 }
 
-bool Fixed::operator==(const Fixed & one){ return (this->_pointValue == one.getRawBits()); }
-bool Fixed::operator!=(const Fixed & one){ return (this->_pointValue != one.getRawBits()); }
-bool Fixed::operator< (const Fixed & one){ return (this->_pointValue < one.getRawBits()); }
-bool Fixed::operator> (const Fixed & one){ return (this->_pointValue > one.getRawBits()); }
-bool Fixed::operator<=(const Fixed & one){ return (this->_pointValue <= one.getRawBits()); }
-bool Fixed::operator>=(const Fixed & one){ return (this->_pointValue >= one.getRawBits()); }
+bool Fixed::operator==(const Fixed & one) const { return (this->_pointValue == one.getRawBits()); }
+bool Fixed::operator!=(const Fixed & one) const { return (this->_pointValue != one.getRawBits()); }
+bool Fixed::operator< (const Fixed & one) const { return (this->_pointValue < one.getRawBits()); }
+bool Fixed::operator> (const Fixed & one) const { return (this->_pointValue > one.getRawBits()); }
+bool Fixed::operator<=(const Fixed & one) const { return (this->_pointValue <= one.getRawBits()); }
+bool Fixed::operator>=(const Fixed & one) const { return (this->_pointValue >= one.getRawBits()); }
 
 Fixed & Fixed::min(Fixed & one, Fixed & two){
 	return (one.getRawBits() > two.getRawBits() ? two : one);
