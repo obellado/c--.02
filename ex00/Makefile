@@ -6,7 +6,7 @@
 #    By: obellado <obellado@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/06/18 18:00:15 by obellado          #+#    #+#              #
-#    Updated: 2021/07/23 17:04:20 by obellado         ###   ########.fr        #
+#    Updated: 2021/07/24 21:28:11 by obellado         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,9 @@ all:			$(NAME)
 
 $(NAME):		$(OBJS)
 				$(CXX) $(FLAGCXX) -o ${NAME} ${OBJS}
+
+%.o:	%.cpp Makefile Fixed.hpp
+		$(CXX) -c $< -o $@
 
 clean:
 				$(RM) $(OBJS)
